@@ -1,0 +1,6 @@
+name: PKNTE
+version: 1.0.0
+description: ProjectKorra NametagEdit Support
+author: PhanaticD
+main: com.phanaticmc.pknte.PKNTE
+depend: [ProjectKorra, NametagEdit]
