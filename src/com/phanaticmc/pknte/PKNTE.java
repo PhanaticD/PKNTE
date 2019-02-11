@@ -1,6 +1,7 @@
 package com.phanaticmc.pknte;
 
 import com.nametagedit.plugin.NametagEdit;
+import com.nametagedit.plugin.api.events.NametagEvent;
 import com.projectkorra.projectkorra.BendingPlayer;
 import com.projectkorra.projectkorra.Element;
 import com.projectkorra.projectkorra.event.PlayerChangeElementEvent;
@@ -49,12 +50,21 @@ public class PKNTE extends JavaPlugin implements Listener{
     
     @EventHandler
     public void PlayerJoin(PlayerJoinEvent event){
+        injectBending(event.getPlayer());
+    }
+    
+    @EventHandler
+    public void onNametagEvent(NametagEvent event) {
+            if (event.getChangeType() == NametagEvent.ChangeType.RELOAD) {
+                injectBending(Bukkit.getPlayerExact(event.getPlayer()));
+            }
+    }
+    
+    private void injectBending(Player player){
         new BukkitRunnable() {
             
             @Override
             public void run() {
-
-                Player player = event.getPlayer();
                 if(!player.isOnline()){
                     return;
                 }
@@ -68,28 +78,28 @@ public class PKNTE extends JavaPlugin implements Listener{
                 
                 prefix = injectColor(bPlayer, prefix);
                 NametagEdit.getApi().setPrefix(player, prefix);
-
             }
             
-        }.runTaskLater(this, 20L);
+        }.runTaskLater(this, 10L); 
     }
     
     private String injectColor(BendingPlayer bPlayer, String prefix){
         Boolean space = true;
         prefix = prefix.trim();
-        if(prefix.length() >=2 && prefix.charAt(prefix.length() - 2) == '§'){
+        if(prefix.length() >=2 && prefix.charAt(prefix.length() - 2) == 'ยง'){
             prefix = prefix.substring(0, prefix.length() - 2);
         }
         if(ChatColor.stripColor(prefix).length() == 0){
             space = false;
         }
 
-	if (bPlayer.getElements().isEmpty()) {
-            prefix = prefix + ChatColor.WHITE;
-	} else if (bPlayer.getElements().size() > 1) {
+        
+        if(bPlayer.getPlayer().hasPermission("bending.avatar") || (bPlayer.hasElement(Element.AIR) && bPlayer.hasElement(Element.EARTH) && bPlayer.hasElement(Element.FIRE) && bPlayer.hasElement(Element.WATER))){
             prefix = prefix + Element.AVATAR.getColor();
-	} else {
+	} else if (bPlayer.getElements().size() > 0) {
             prefix = prefix + bPlayer.getElements().get(0).getColor();
+	} else {
+            prefix = prefix + ChatColor.WHITE;
         }
         
         if(space){
