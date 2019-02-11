@@ -19,21 +19,14 @@
       <dependency>
          <groupId>org.spigotmc</groupId>
          <artifactId>spigot-api</artifactId>
-         <version>1.12.2-R0.1-SNAPSHOT</version>
-         <scope>provided</scope>
-      </dependency>
-      <!-- Bukkit API -->
-      <dependency>
-         <groupId>org.bukkit</groupId>
-         <artifactId>craftbukkit</artifactId>
-         <version>1.12.2-R0.1-SNAPSHOT</version>
+         <version>1.13.2-R0.1-SNAPSHOT</version>
          <scope>provided</scope>
       </dependency>
       <!-- ProjectKorra -->
       <dependency>
          <groupId>com.projectkorra</groupId>
          <artifactId>projectkorra</artifactId>
-         <version>1.8.6</version>
+         <version>1.8.8</version>
          <scope>provided</scope>
       </dependency>
       <dependency>
