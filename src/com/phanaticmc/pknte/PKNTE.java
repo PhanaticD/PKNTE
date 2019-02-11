@@ -86,7 +86,7 @@ public class PKNTE extends JavaPlugin implements Listener{
     private String injectColor(BendingPlayer bPlayer, String prefix){
         Boolean space = true;
         prefix = prefix.trim();
-        if(prefix.length() >=2 && prefix.charAt(prefix.length() - 2) == 'ยง'){
+        if(prefix.length() >=2 && prefix.charAt(prefix.length() - 2) == '§'){
             prefix = prefix.substring(0, prefix.length() - 2);
         }
         if(ChatColor.stripColor(prefix).length() == 0){
